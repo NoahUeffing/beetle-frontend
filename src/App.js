@@ -1,53 +1,42 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import './App.css';
+import { Link, Outlet } from 'react-router-dom';
 
-function Hello(props) {
-    const [isTrue, setIsTrue] = useState(true)
-    const [crowd, setCrowd] = useState([]);
+function App() {
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          <h1 className="mt-3">Beetle Supplements</h1>
+        </div>
 
-    const toggleTrue = () => {
-        setIsTrue(!isTrue)
-    }
-
-    useEffect(() => {
-        console.log(`useEffect fired!`);
-
-        let people = [
-            { id: 1, firstName: 'John', lastName: 'Doe', dob: '1990-01-01' },
-            { id: 2, firstName: 'Jane', lastName: 'Smith', dob: '1992-02-02' },
-            { id: 3, firstName: 'Alice', lastName: 'Johnson', dob: '1995-03-03' }
-        ]
-        setCrowd(people);
-    }, []);
-
-    return (
-        <> {/* This is a Fragment tag */}
-            <hr />
-            <h1 className='h1-green'>{props.msg}</h1>
-            <hr />
-            {isTrue && 
-                <>
-                    <p>The current value of isTrue is true</p>
-                </>
-            }
-            <hr />
-            {isTrue
-            ?  <p>Is true</p>
-            : <p>Is false</p>
-            }
-            <hr />
-            <a href="#!" className="btn btn-outline-secondary" onClick={toggleTrue}>Toggle isTrue</a>
-            <hr />
-            <h3>People</h3>
-            <ul className="list-group">
-                {crowd.map(person => (
-                    <li key={person.id} className="list-group-item">
-                        {person.firstName} {person.lastName} - {person.dob}
-                    </li>
-                ))}
-            </ul>
-        </>
-    );
+        <div className="col text-end ">
+          <Link to="/login">
+            <span className="badge bg-success mt-4">Login</span>
+          </Link>
+        </div>
+      </div>
+      <hr></hr>
+      <div className="row">
+        <div className="col-md-2">
+          <nav className="nav flex-column">
+            <div className="list-group">
+              <Link to="/" className="list-group-item list-group-item-action">
+                Home
+              </Link>
+              <Link to="/products" className="list-group-item list-group-item-action">
+                Products
+              </Link>
+              <Link to="/about" className="list-group-item list-group-item-action">
+                About
+              </Link>
+            </div>
+          </nav>
+        </div>
+        <div className="col-md-10">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Hello;
+export default App;

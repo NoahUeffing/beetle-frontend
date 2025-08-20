@@ -1,18 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-//import AppClass from './AppClass';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./components/ErrorPage";
+import Home from './components/Home';
+import Products from './components/Products';
+import About from "./components/About";
+import Login from "./components/Login";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <Home /> },
+      {path: "/products", element: <Products />},
+      {path: "/about", element: <About />},
+      {path: "/login", element: <Login />}
+    ]
+  }
+])
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <div className="container">
-      <div className="row">
-        <div className="col">
-          <App msg="State using functional component!"/>
-          {/* <AppClass msg="State using classes!"/> */}
-        </div>
-      </div>
-    </div>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
