@@ -11,7 +11,7 @@ const DropdownMenu = ({ show, links, onClose }) => {
           key={item.to}
           className="dropdown-item-custom"
           to={item.to}
-          onClick={onClose}
+          onClick={item.onClick ? item.onClick : onClose}
         >
           {item.label}
         </Link>

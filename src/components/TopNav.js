@@ -10,15 +10,20 @@ const TopNav = ({
   navLinks = [{ to: "/about", label: "About" }],
   dropdownLinks = [],
   jwtToken,
+  setJwtToken,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const logOut = () => {
+    // TODO: add this
+    setJwtToken("");
+  };
   // Conditionally add Login or Logout
   const userDropdownLinks = jwtToken
     ? [
         ...dropdownLinks,
         { to: "/profile", label: "Profile" },
         { to: "/favourites", label: "Favourites" },
-        { to: "/logout", label: "Logout" },
+        { to: "/login", label: "Logout", onClick: logOut },
       ]
     : [...dropdownLinks, { to: "/login", label: "Login" }];
   return (

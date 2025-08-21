@@ -1,33 +1,13 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import useFetchProduct from "../hooks/FetchProduct";
 
 const Product = () => {
-  const [product, setProduct] = useState({});
-  let { id } = useParams();
+    const { productId } = useParams();
+    const { product, loading, error } = useFetchProduct(productId);
 
-  useEffect(() => {
-    let myProduct = {
-      id: 1,
-      lnhpdid: 1,
-      licenseNumber: 1,
-      licenseDate: "1994-01-01",
-      revisedDate: "1994-01-01",
-      timeReceipt: "1994-01-01",
-      dateStart: "1994-01-01",
-      productName: "Product 1",
-      productNameID: 1,
-      dosageFormID: 1,
-      companyID: 1,
-      submissionTypeID: 1,
-      flagPrimaryName: "flagName",
-      flagProductStatus: "flagStatus",
-      flagAttestedMonograph: "mono",
-      createdAt: "1994-01-01",
-      updatedAt: "1994-01-01",
-      deletedAt: "1994-01-01",
-    };
-    setProduct(myProduct);
-  }, [id]);
+  if (loading) return <div className="text-center">Loading...</div>;
+  if (error) return <div className="text-center text-danger">Error: {error.message}</div>;
+
   return (
     <>
       <div className="text-center">
