@@ -1,79 +1,61 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faBug } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import DropdownMenu from "./Dropdown";
+import SearchBar from "./SearchBar";
+import "../style.css";
 
-const TopNav = () => {
+const TopNav = ({
+  navLinks = [{ to: "/about", label: "About" }],
+  dropdownLinks = [],
+  jwtToken,
+}) => {
   const [showDropdown, setShowDropdown] = useState(false);
-
-  const [jwtToken, setJwtToken] = useState("");
-
-  const handleIconClick = () => {
-    setShowDropdown((prev) => !prev);
-  };
-
+  // Conditionally add Login or Logout
+  const userDropdownLinks = jwtToken
+    ? [
+        ...dropdownLinks,
+        { to: "/profile", label: "Profile" },
+        { to: "/favourites", label: "Favourites" },
+        { to: "/logout", label: "Logout" },
+      ]
+    : [...dropdownLinks, { to: "/login", label: "Login" }];
   return (
     <>
-      <div className="row">
-        <div className="col">
-          <h1 className="mt-3">Beetle Supplements</h1>
-        </div>
-        <div className="col text-end position-relative">
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={handleIconClick}
-            tabIndex={0}
-            aria-label="User menu"
-          >
-            <FontAwesomeIcon icon={faUser} className="fa-2xl mt-4" />
-          </span>
-          {showDropdown && (
-            <div
-              className="dropdown-menu show"
-              style={{
-                position: "absolute",
-                right: 0,
-                top: "100%",
-                minWidth: "150px",
-                zIndex: 1000,
-              }}
-            >
-              <Link
-                className="dropdown-item"
-                to="/profile"
-                onClick={() => setShowDropdown(false)}
-              >
-                Profile
-              </Link>
-              <Link
-                className="dropdown-item"
-                to="/settings"
-                onClick={() => setShowDropdown(false)}
-              >
-                Settings
-              </Link>
-              {jwtToken === "" ? (
-                <Link
-                  className="dropdown-item"
-                  to="/login"
-                  onClick={() => setShowDropdown(false)}
-                >
-                  Login
-                </Link>
-              ) : (
-                <Link
-                  className="dropdown-item"
-                  to="/logout"
-                  onClick={() => setShowDropdown(false)}
-                >
-                  Logout
-                </Link>
-              )}
+      <div className="topnav-row">
+        <div className="topnav-col">
+          <Link to="/" className="topnav-home-link">
+            <div className="topnav-brand">
+              <FontAwesomeIcon icon={faBug} className="topnav-bug-icon" />
+              <h2 className="topnav-title">Beetle Supplements</h2>
             </div>
-          )}
+          </Link>
+        </div>
+        <div className="topnav-search">
+          <SearchBar className="searchbar-main" />
+        </div>
+        <div className="topnav-col topnav-right">
+          {navLinks.map((item) => (
+            <Link key={item.to} to={item.to} className="topnav-link">
+              {item.label}
+            </Link>
+          ))}
+          <div
+            className="topnav-dropdown-trigger"
+            onMouseEnter={() => setShowDropdown(true)}
+            onMouseLeave={() => setShowDropdown(false)}
+          >
+            <FontAwesomeIcon icon={faUser} className="topnav-user-icon" />
+            <DropdownMenu
+              show={showDropdown}
+              links={userDropdownLinks}
+              onClose={() => setShowDropdown(false)}
+            />
+          </div>
         </div>
       </div>
-      <hr></hr>
+      <hr />
     </>
   );
 };

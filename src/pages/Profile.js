@@ -1,12 +1,12 @@
-const Login = () => {
+const Profile = () => {
 
     return(
         <>
         <div className="text-center">
-          <h2 className="p-3 mb-3">Login</h2>
+          <h2 className="p-3 mb-3">Profile</h2>
         </div>
         </>
     )
 }
 
-export default Login;
+export default Profile;
