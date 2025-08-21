@@ -6,15 +6,18 @@ const useFetchProduct = (productId) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!productId) return;
+    setLoading(true);
     fetch(`http://localhost:8080/v1/product/license/${productId}`)
-      .then((response) => response.json())
-      .then((responseData) => {
-        setProduct(responseData.data || null);
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
+      .then((data) => {
+        setProduct(data);
         setLoading(false);
       })
-      .catch((error) => {
-        setError(error);
+      .catch((err) => {
+        setError(err);
         setLoading(false);
       });
   }, [productId]);

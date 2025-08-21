@@ -11,14 +11,16 @@ const Product = () => {
   return (
     <>
       <div className="text-center">
-        <h2 className="p-3 mb-3">Product: {product.productName}</h2>
+        <h2 className="p-3 mb-3">Product: {product.product_name}</h2>
         <hr />
-        <p>License Number: {product.licenseNumber}</p>
-        <p>License Date: {product.licenseDate}</p>
-        <p>Revised Date: {product.revisedDate}</p>
-        <p>Time Receipt: {product.timeReceipt}</p>
-        <p>Date Start: {product.dateStart}</p>
-        <p>Company ID: {product.companyID}</p>
+        <p>LNHPID: {product.lnhp_id}</p>
+        <p>License Date: {product.license_date}</p>
+        <p>Revised Date: {product.revised_date}</p>
+        <p>Time Receipt: {product.time_receipt}</p>
+        <p>Date Start: {product.date_start}</p>
+        <p>Company ID: {product.company_id}</p>
+        <p>Dosage Form ID: {product.dosage_form_id}</p>
+        <p>Flag Product Status: {product.flag_product_status}</p>
       </div>
     </>
   );
