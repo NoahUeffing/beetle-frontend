@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import useFetchProducts from "../hooks/FetchProducts";
 import { PRODUCT_DETAIL_PAGE } from "../constants";
+import { useMemo } from "react";
 
 const Products = () => {
-  const { products, loading, error } = useFetchProducts();
+  const forms = useMemo(() => ["cf51365d-e460-4021-961e-a02277424c98"], []);
+  const { products, loading, error } = useFetchProducts({
+  });
 
   if (loading) return <div className="text-center">Loading...</div>;
   if (error) return <div className="text-center text-danger">Error: {error.message}</div>;
