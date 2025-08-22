@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_BASE_URL } from "../constants";
 
 const useFetchProduct = (productId) => {
   const [product, setProduct] = useState(null);
@@ -7,7 +8,7 @@ const useFetchProduct = (productId) => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:8080/v1/product/license/${productId}`)
+    fetch(`${API_BASE_URL}/product/license/${productId}`)
       .then((res) => {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();

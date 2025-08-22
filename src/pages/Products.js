@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useFetchProducts from "../hooks/FetchProducts";
+import { PRODUCT_DETAIL_PAGE } from "../constants";
 
 const Products = () => {
   const { products, loading, error } = useFetchProducts();
@@ -25,7 +26,7 @@ const Products = () => {
             <tr key={product.id}>
               <td>{product.id}</td>
               <td>
-                <Link to={`/products/${product.id}`}>{product.product_name}</Link>
+                <Link to={`${PRODUCT_DETAIL_PAGE.replace(':productId', product.id)}`}>{product.product_name}</Link>
               </td>
               <td>{product.date_start}</td>
               <td>{product.dosage_form_id}</td>

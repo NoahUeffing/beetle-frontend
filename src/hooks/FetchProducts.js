@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_BASE_URL } from "../constants";
 
 const useFetchProducts = () => {
   const [products, setProducts] = useState([]);
@@ -6,7 +7,7 @@ const useFetchProducts = () => {
   const [error, setError] = useState(null);
 // TODO: Add sort and filtering and pagination
   useEffect(() => {
-    fetch(`http://localhost:8080/v1/product/licenses`)
+    fetch(`${API_BASE_URL}/product/licenses`)
       .then((response) => response.json())
       .then((responseData) => {
         setProducts(responseData.data || []);
