@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import DropdownMenu from "./Dropdown";
 import SearchBar from "./SearchBar";
+import { HOME_PAGE, PROFILE_PAGE, FAVOURITES_PAGE, LOGIN_PAGE, ABOUT_PAGE } from "../constants";
 import "../style.css";
 
 const TopNav = ({
-  navLinks = [{ to: "/about", label: "About" }],
+  navLinks = [{ to: ABOUT_PAGE, label: "About" }],
   dropdownLinks = [],
   jwtToken,
   setJwtToken,
@@ -21,16 +22,16 @@ const TopNav = ({
   const userDropdownLinks = jwtToken
     ? [
         ...dropdownLinks,
-        { to: "/profile", label: "Profile" },
-        { to: "/favourites", label: "Favourites" },
-        { to: "/login", label: "Logout", onClick: logOut },
+        { to: PROFILE_PAGE, label: "Profile" },
+        { to: FAVOURITES_PAGE, label: "Favourites" },
+        { to: LOGIN_PAGE, label: "Logout", onClick: logOut },
       ]
-    : [...dropdownLinks, { to: "/login", label: "Login" }];
+    : [...dropdownLinks, { to: LOGIN_PAGE, label: "Login" }];
   return (
     <>
       <div className="topnav-row">
         <div className="topnav-col">
-          <Link to="/" className="topnav-home-link">
+          <Link to={HOME_PAGE} className="topnav-home-link">
             <div className="topnav-brand">
               <FontAwesomeIcon icon={faBug} className="topnav-bug-icon" />
               <h2 className="topnav-title">Beetle Supplements</h2>

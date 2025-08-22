@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import useFetchProducts from "../hooks/FetchProducts";
+import { PRODUCT_DETAIL_PAGE } from "../constants";
+import { useMemo } from "react";
 
 const Products = () => {
-  const { products, loading, error } = useFetchProducts();
+  const forms = useMemo(() => ["cf51365d-e460-4021-961e-a02277424c98"], []);
+  const { products, loading, error } = useFetchProducts({
+  });
 
   if (loading) return <div className="text-center">Loading...</div>;
   if (error) return <div className="text-center text-danger">Error: {error.message}</div>;
@@ -25,7 +29,7 @@ const Products = () => {
             <tr key={product.id}>
               <td>{product.id}</td>
               <td>
-                <Link to={`/products/${product.id}`}>{product.product_name}</Link>
+                <Link to={`${PRODUCT_DETAIL_PAGE.replace(':productId', product.id)}`}>{product.product_name}</Link>
               </td>
               <td>{product.date_start}</td>
               <td>{product.dosage_form_id}</td>

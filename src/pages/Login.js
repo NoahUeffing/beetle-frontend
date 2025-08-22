@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import Input from "../components/Input";
+import { HOME_PAGE } from "../constants";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ const Login = () => {
     if (email === "admin@email.com") {
       // TODO: Update this
       setJwtToken("your_jwt_token");
-      navigate("/");
+      navigate(HOME_PAGE);
     } else {
       setAlertClassName("alert-danger");
       setAlertMessage("Invalid credentials");
